@@ -13,7 +13,7 @@ in /var/lib/zookeeper. This is identical to the RPM distribution that users shou
 ## Deploy File 
 The [zookeeper.yaml](YAML) contained deploy a small size Zookeeper on your Kubernetes.
 - Your Kubernetes must have a dinamic PV allocation
-- You must have to set `region-infra` at least three diferent nodes
+- You must have to set `region=infra` at least three diferent nodes
 - The namespace to be used is `zookeeper`
 - When you update your cluster ALWAYS utilize the API calls for CORDON/DRAIN
 
