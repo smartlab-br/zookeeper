@@ -16,7 +16,7 @@ RUN set -x \
     && wget -q "http://www.apache.org/dist/zookeeper/$ZK_DIST/$ZK_DIST.tar.gz" \
     && wget -q "http://www.apache.org/dist/zookeeper/$ZK_DIST/$ZK_DIST.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
+    && gpg --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key "$GPG_KEY" \
     && gpg --batch --verify "$ZK_DIST.tar.gz.asc" "$ZK_DIST.tar.gz" \
     && tar -xzf "$ZK_DIST.tar.gz" -C /opt \
     && rm -r "$GNUPGHOME" "$ZK_DIST.tar.gz" "$ZK_DIST.tar.gz.asc" \
@@ -52,7 +52,10 @@ RUN set -x \
     && [ `id -g $ZK_USER` -eq 1000 ] \
     && mkdir -p $ZK_DATA_DIR $ZK_DATA_LOG_DIR $ZK_LOG_DIR /usr/share/zookeeper /tmp/zookeeper /usr/etc/ \
     && chown -R "$ZK_USER:$ZK_USER" /opt/$ZK_DIST $ZK_DATA_DIR $ZK_LOG_DIR $ZK_DATA_LOG_DIR /tmp/zookeeper \
+    && chmod +x /opt/zookeeper/bin/* \
     && ln -s /opt/zookeeper/conf/ /usr/etc/zookeeper \
     && ln -s /opt/zookeeper/bin/* /usr/bin \
     && ln -s /opt/zookeeper/$ZK_DIST.jar /usr/share/zookeeper/ \
     && ln -s /opt/zookeeper/lib/* /usr/share/zookeeper 
+
+USER $ZK_USER
