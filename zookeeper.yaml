@@ -94,7 +94,6 @@ spec:
     app: zk
   type: NodePort
   externalTrafficPolicy: Local
-  externalName: zk.mpt.mp.br
 
 ---
 
@@ -159,7 +158,8 @@ spec:
                 - infra  
       containers:
       - name: kubernetes-zookeeper
-        imagePullPolicy: IfNotPresent
+        #imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         image: "smartlab/zookeeper:3.4.14"
         resources:
           requests:
