@@ -27,11 +27,11 @@ spec:
       memory: 1Gi
       cpu: 0.5
     max:
-      memory: 2Gi
+      memory: 1Gi
       cpu: 0.5
     min:
-      memory: 10Mi
-      cpu: 0.05
+      memory: 512Mi
+      cpu: 0.25
     type: Container
 
 ---
@@ -47,9 +47,9 @@ metadata:
     app: zk
 spec:
   hard:
-    requests.cpu: 3
+    requests.cpu: 1.5
     requests.memory: 3Gi
-    limits.cpu: 5
+    limits.cpu: 2.5
     limits.memory: 5Gi
     pods: 5
 
@@ -160,7 +160,7 @@ spec:
       containers:
       - name: kubernetes-zookeeper
         imagePullPolicy: IfNotPresent
-        image: "k8s.gcr.io/kubernetes-zookeeper:1.0-3.4.10"
+        image: "smartlab/zookeeper:3.4.14"
         resources:
           requests:
             memory: "1Gi"
